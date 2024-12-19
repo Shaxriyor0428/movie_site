@@ -3,7 +3,7 @@ import MovieItem from "./MovieItem";
 
 const Movies = ({ data }) => {
   return (
-    <div className="flex gap-[20px] flex-wrap container mb-14">
+    <div className="container mb-14 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
       {data?.results?.map((movie) => (
         <MovieItem key={movie?.id} {...movie} />
       ))}
