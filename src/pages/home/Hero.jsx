@@ -41,7 +41,7 @@ const Hero = ({ movies }) => {
           "--swiper-pagination-color": "#fff",
         }}
         spaceBetween={10}
-        loop={true}
+        // loop={true}
         autoplay={{
           delay: 2500,
           disableOnInteraction: false,
@@ -61,7 +61,7 @@ const Hero = ({ movies }) => {
         freeMode={true}
         watchSlidesProgress={true}
         modules={[FreeMode, Navigation, Thumbs]}
-        className="mySwiper container"
+        className="mySwiper container mt-4"
       >
         {heroItems2}
       </Swiper>

@@ -3,6 +3,7 @@ import Movies from "@/components/movies/Movies";
 import { request } from "@/api";
 import { useLocation } from "react-router-dom";
 import Hero from "./Hero";
+import Carousel from "./Carousel";
 
 const Home = () => {
   const location = useLocation();
@@ -22,7 +23,8 @@ const Home = () => {
 
   return (
     <>
-      <Hero movies = {data?.results}/>
+      <Hero movies={data?.results} />
+      {/* <Carousel data={data?.results}/> */}
       <Movies data={data} />
     </>
   );

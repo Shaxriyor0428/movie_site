@@ -9,7 +9,7 @@ const MovieItem = ({ title, poster_path, vote_average }) => {
         alt=""
         className=""
       />
-      <h2 className=" font-medium text-[24px] leading-7 text-white line-clamp-2">
+      <h2 className=" font-medium text-[24px] leading-7 text-white line-clamp-1">
         {title}
       </h2>
       <p className="text-[#4D4D4D] text-sm font-medium">{vote_average}</p>

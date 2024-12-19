@@ -7,7 +7,7 @@ const Header = () => {
   return (
     <header
       id="header"
-      className="w-full h-[80px] bg-secondary sticky top-0 left-0 z-20"
+      className="w-full h-[80px] bg-black sticky top-0 left-0 z-20"
     >
       <nav className="w-[1212px] h-full px-4 mx-auto flex items-center justify-between">
         <div>
