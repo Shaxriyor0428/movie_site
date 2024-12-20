@@ -5,6 +5,6 @@
 * {
   scroll-behavior: smooth;
 }
-#header .active{
+#header .active {
   color: red;
 }

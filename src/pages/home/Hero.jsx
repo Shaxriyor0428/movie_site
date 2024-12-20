@@ -37,7 +37,7 @@ const Hero = ({ movies }) => {
     </SwiperSlide>
   ));
   return (
-    <div className=" mb-10">
+    <div className=" dark:bg-black">
       <Swiper
         style={{
           "--swiper-navigation-color": "#fff",
