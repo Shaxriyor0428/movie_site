@@ -44,7 +44,7 @@ const Header = () => {
   }
 
   return (
-    <header className="w-full h-[80px] bg-white dark:bg-black sticky top-0 left-0 z-20 shadow-md">
+    <header id="header" className="w-full h-[80px] bg-white dark:bg-black sticky top-0 left-0 z-20 shadow-md">
       <nav className="container mx-auto px-4 h-full flex items-center justify-between flex-wrap">
         <Link to="/">
           <img src={logo} alt="logo" className="w-[112px] h-9" />
