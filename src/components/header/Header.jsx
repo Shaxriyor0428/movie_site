@@ -4,8 +4,7 @@ import { Link, NavLink } from "react-router-dom";
 import { HEADER_LINKS } from "../../static";
 import { FaMoon, FaRegSun } from "react-icons/fa";
 import { useTranslation } from "react-i18next";
-import i18n from "@/lang/index";
-
+import i18n from "../../lang";
 import englishFlag from "@/assets/flags/english.png";
 import uzbekFlag from "@/assets/flags/uzbek.png";
 import russianFlag from "@/assets/flags/russian.png";
@@ -17,7 +16,9 @@ const LANGUAGES = [
 ];
 
 const Header = () => {
-  const [dark, setDark] = useState(true);
+  const [dark, setDark] = useState(
+    localStorage.getItem("dark_mode") === "true"
+  );
   const { i18n, t } = useTranslation();
 
   useEffect(() => {
@@ -28,17 +29,25 @@ const Header = () => {
     }
   }, [dark]);
 
+  const toggleDarkMode = () => {
+    setDark((prevDark) => {
+      const newDarkMode = !prevDark;
+      localStorage.setItem("dark_mode", newDarkMode);
+      return newDarkMode;
+    });
+  };
+
   function changeLang(e) {
     const lang_code = e.target.value;
     i18n.changeLanguage(lang_code);
-    localStorage.setItem("lang_code",lang_code);
+    localStorage.setItem("lang_code", lang_code);
   }
 
   return (
     <header className="w-full h-[80px] bg-white dark:bg-black sticky top-0 left-0 z-20 shadow-md">
       <nav className="container mx-auto px-4 h-full flex items-center justify-between flex-wrap">
         <Link to="/">
-          <img src={logo} alt="logo" className="w-[112px] h-9 " />
+          <img src={logo} alt="logo" className="w-[112px] h-9" />
         </Link>
 
         <ul className="flex text-black dark:text-white gap-5 flex-wrap">
@@ -57,23 +66,19 @@ const Header = () => {
 
         <div className="flex items-center gap-5">
           <select
-            className="bg-gray-300 dark:bg-slate-800 dark:text-white rounded-lg py-2 px-2 outline-none flex items-center gap-2"
+            className="bg-gray-300 dark:bg-slate-800 dark:text-white rounded-lg py-2 px-2 outline-none"
             defaultValue={localStorage.getItem("lang_code") || i18n.language}
             onChange={changeLang}
           >
             {LANGUAGES.map((lang) => (
-              <option
-                key={lang.code}
-                value={lang.code}
-                className="flex items-center gap-2"
-              >
+              <option key={lang.code} value={lang.code}>
                 {lang.label}
               </option>
             ))}
           </select>
 
           <button
-            onClick={() => setDark(!dark)}
+            onClick={toggleDarkMode}
             className="text-2xl text-gray-700 dark:text-white"
           >
             {dark ? <FaRegSun /> : <FaMoon />}
