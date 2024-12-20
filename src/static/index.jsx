@@ -15,7 +15,7 @@ export const HEADER_LINKS = [
         />
       </svg>
     ),
-    title: "Afisha",
+    title: "afisha",
     url: "/afisha",
   },
   {
@@ -42,7 +42,7 @@ export const HEADER_LINKS = [
         />
       </svg>
     ),
-    title: "Seans",
+    title: "seans",
     url: "/seans",
   },
   {
@@ -61,7 +61,7 @@ export const HEADER_LINKS = [
         />
       </svg>
     ),
-    title: "Biletlar",
+    title: "tickets",
     url: "/tickets",
   },
   {
@@ -80,7 +80,7 @@ export const HEADER_LINKS = [
         />
       </svg>
     ),
-    title: "Qidiruv",
+    title: "search",
     url: "/search",
   },
 ];

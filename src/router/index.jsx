@@ -12,10 +12,11 @@ const Router = () => {
     {
       path: "/latest",
       element: <Latest />,
-    },{
-      path:"*",
-      element:<NotFound/>
-    }
+    },
+    {
+      path: "*",
+      element: <NotFound />,
+    },
   ]);
 };
 export default Router;

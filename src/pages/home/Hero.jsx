@@ -6,8 +6,11 @@ import "swiper/css/navigation";
 import "swiper/css/thumbs";
 import "./styles.css";
 import { FreeMode, Navigation, Thumbs, Autoplay } from "swiper/modules";
+import { useTranslation } from "react-i18next";
 
 const Hero = ({ movies }) => {
+  const { t } = useTranslation();
+
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
   const heroItems1 = movies?.map((movie) => (
     <SwiperSlide key={movie.id} className=" relative">
@@ -20,7 +23,7 @@ const Hero = ({ movies }) => {
         <p className="text-sm leading-4"> {movie.release_date}</p>
         <span>raring: {movie.vote_average} </span>
         <button className="bg-white text-primary py-[14px] px-[137px] rounded-lg text-[16px] font-medium">
-          Ko'rish
+          {t("hero.watch")}
         </button>
       </div>
     </SwiperSlide>
