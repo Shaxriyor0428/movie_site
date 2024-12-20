@@ -10,7 +10,11 @@ const Home = () => {
 
   useEffect(() => {
     request
-      .get("/discover/movie")
+      .get("/discover/movie", {
+        params: {
+          without_genre: "18,99",
+        },
+      })
       .then((res) => setData(res.data))
       .catch((err) => alert("ERROR ON HOME", err?.response?.data));
   }, []);

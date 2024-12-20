@@ -31,6 +31,7 @@ const Header = () => {
   function changeLang(e) {
     const lang_code = e.target.value;
     i18n.changeLanguage(lang_code);
+    localStorage.setItem("lang_code",lang_code);
   }
 
   return (
@@ -57,7 +58,7 @@ const Header = () => {
         <div className="flex items-center gap-5">
           <select
             className="bg-gray-300 dark:bg-slate-800 dark:text-white rounded-lg py-2 px-2 outline-none flex items-center gap-2"
-            defaultValue={i18n.language}
+            defaultValue={localStorage.getItem("lang_code") || i18n.language}
             onChange={changeLang}
           >
             {LANGUAGES.map((lang) => (

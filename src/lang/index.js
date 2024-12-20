@@ -5,8 +5,8 @@ import { initReactI18next } from "react-i18next";
 import i18n from "i18next";
 
 i18n.use(initReactI18next).init({
-  lang: "en",
-  fallbackLng: "en",
+  lng: localStorage.getItem("lang_code") || "en",
+  fallbackLng: localStorage.getItem("lang_code") || "en",
   interpolation: {
     escapeValue: false,
   },
