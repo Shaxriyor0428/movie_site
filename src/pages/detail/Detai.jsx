@@ -10,6 +10,7 @@ const Detail = () => {
   const [translatedGenres, setTranslatedGenres] = useState([]);
   const [translatedJobs, setTranslatedJobs] = useState([]);
   const [translatedCasts, setTranslatedCasts] = useState([]);
+  const [desc, setDisc] = useState("");
 
   translate.engine = "google";
   const navigate = useNavigate();
@@ -106,6 +107,13 @@ const Detail = () => {
     );
   }
 
+  const overviewS = async () => {
+    const description = await translate(data?.overview, "ru");
+    setDisc(description);
+  };
+
+  overviewS();
+
   return (
     <div className="min-h-screen dark:bg-black dark:text-white text-black">
       <div
@@ -198,8 +206,34 @@ const Detail = () => {
               </div>
             ))}
           </div>
+          <div className="Roli pb-6">
+            <h3 className="mt-12 text-white text-xl">Сюжет</h3>
+            <p className="mt-6 text-base">{desc}</p>
+          </div>
+          <button className="mt-6 mb-10 bg-primary w-full px-6 py-4 rounded-xl text-white">
+            Купить билет
+          </button>
         </div>
       </div>
+
+      {similar && similar.results.length > 0 && (
+        <div className=" container">
+          <h2 className="text-2xl font-bold mb-4">Similar Movies</h2>
+          <div className="flex flex-wrap gap-4">
+            {similar.results.slice(0, 10).map((movie) => (
+              <div key={movie.id} className="w-56">
+                <img
+                  onClick={() => navigate(`/product/${movie.id}`)}
+                  src={import.meta.env.VITE_IMAGE_URL + movie.poster_path}
+                  alt={movie.title}
+                  className="w-56 h-80 object-cover rounded-lg mb-2"
+                />
+                <p className="text-center">{movie.title}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
     </div>
   );
 };
