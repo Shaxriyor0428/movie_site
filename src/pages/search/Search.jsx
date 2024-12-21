@@ -61,7 +61,9 @@ const Search = () => {
         </h2>
 
         <div className="mb-6">
-          <h3 className="dark:text-white text-lg font-medium mb-2 text-black">Kino Janrlari:</h3>
+          <h3 className="dark:text-white text-lg font-medium mb-2 text-black">
+            Kino Janrlari:
+          </h3>
           <div className="genre-scrollbar flex gap-4 overflow-x-auto py-2">
             {genres?.map((genre) => (
               <button
@@ -89,16 +91,44 @@ const Search = () => {
           )}
         </div>
 
-        <div className="flex justify-center py-4 dark:bg-slate-600">
+        <div className="flex justify-center py-4">
           <Pagination
             page={page}
             onChange={handleChange}
             size="large"
             count={data?.total_pages <= 500 ? data?.total_pages : 500}
             variant="outlined"
-            shape="rounded"
+            shape="circular"
             color="primary"
             className="text-white"
+            sx={{
+              "& .MuiPaginationItem-root": {
+                color: "#fff",
+                backgroundColor: "#000",
+                border: "1px solid #ff4040",
+                "&:hover": {
+                  backgroundColor: "#ff4040",
+                  color: "#00bfff",
+                },
+                "&:focus": {
+                  outline: "2px solid #ff7373",
+                },
+              },
+              "& .Mui-selected": {
+                backgroundColor: "#ff4040",
+                color: "#fff",
+                border: "1px solid #ff7373",
+                "&:hover": {
+                  backgroundColor: "#ff7373",
+                },
+              },
+              "& .MuiPaginationItem-ellipsis": {
+                color: "#ff7373",
+              },
+              "& .MuiPagination-ul": {
+                gap: "8px",
+              },
+            }}
           />
         </div>
       </div>

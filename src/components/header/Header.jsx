@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import logo from "@/assets/logo.png";
 import { Link, NavLink } from "react-router-dom";
 import { HEADER_LINKS } from "../../static";
-import { FaMoon, FaRegSun } from "react-icons/fa";
+import { FaMoon } from "react-icons/fa";
 import { useTranslation } from "react-i18next";
 import i18n from "../../lang";
 import englishFlag from "@/assets/flags/english.png";
