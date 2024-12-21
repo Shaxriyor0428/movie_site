@@ -3,21 +3,26 @@ import Movies from "@/components/movies/Movies";
 import { request } from "@/api";
 import { useLocation } from "react-router-dom";
 import Hero from "./Hero";
+import { useQuery } from "@tanstack/react-query";
+import Loading from "../../components/loading/Loading";
 
 const Home = () => {
+  const {
+    data: movie,
+    isPending,
+    error,
+  } = useQuery({
+    queryKey: ["movie"],
+    queryFn: () =>
+      request
+        .get("/discover/movie", {
+          params: {
+            without_genre: "18,99",
+          },
+        })
+        .then((res) => res.data),
+  });
   const location = useLocation();
-  const [data, setData] = useState(null);
-
-  useEffect(() => {
-    request
-      .get("/discover/movie", {
-        params: {
-          without_genre: "18,99",
-        },
-      })
-      .then((res) => setData(res.data))
-      .catch((err) => alert("ERROR ON HOME", err?.response?.data));
-  }, []);
 
   useEffect(() => {
     if (location.pathname === "/") {
@@ -27,8 +32,14 @@ const Home = () => {
 
   return (
     <>
-      <Hero movies={data?.results} />
-      <Movies data={data} />
+      {isPending && (
+        <div className="text-center text-2xl min-h-10 text-red-600">
+          {" "}
+          <Loading />
+        </div>
+      )}
+      <Hero movies={movie?.results} />
+      <Movies data={movie}  />
     </>
   );
 };

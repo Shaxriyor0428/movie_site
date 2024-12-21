@@ -4,6 +4,7 @@ import Latest from "@/pages/latest/Latest";
 import NotFound from "../pages/not-found/NotFound";
 import Detail from "../pages/detail/Detai";
 import Layout from "../pages/layout/Layout";
+import Search from "../pages/search/Search";
 
 const Router = () => {
   return useRoutes([
@@ -22,6 +23,10 @@ const Router = () => {
         {
           path: "/product/:id",
           element: <Detail />,
+        },
+        {
+          path: "/search",
+          element: <Search />,
         },
         {
           path: "*",

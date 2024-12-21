@@ -1,33 +1,51 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { request } from "@/api";
+import { useQuery } from "@tanstack/react-query";
+import Loading from "../../components/loading/Loading";
+import translate from "translate";
 
 const Detail = () => {
-  const [data, setData] = useState(null);
-  const [images, setImages] = useState(null);
-  const [similar, setSimilar] = useState(null);
+  translate.engine = "google";
   const navigate = useNavigate();
   const { id } = useParams();
-
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [id]);
 
-  useEffect(() => {
-    request.get(`movie/${id}`).then((res) => setData(res.data));
-  }, [id]);
+  const { data, isLoading } = useQuery({
+    queryKey: [`movie/${id}`],
+    queryFn: () =>
+      request
+        .get(`movie/${id}`, { params: { without_genre: "18,99" } })
+        .then((res) => res.data),
+  });
 
-  useEffect(() => {
-    request.get(`movie/${id}/images`).then((res) => setImages(res.data));
-  }, [id]);
+  const { data: images, isLoading: isImageLoading } = useQuery({
+    queryKey: [`movie/${id}/images`],
+    queryFn: () => request.get(`movie/${id}/images`).then((res) => res.data),
+  });
 
-  useEffect(() => {
-    request.get(`movie/${id}/similar`).then((res) => setSimilar(res.data));
-  }, [id]);
+  const { data: similar, isLoading: isSimilarLoading } = useQuery({
+    queryKey: [`movie/${id}/similar`],
+    queryFn: () => request.get(`movie/${id}/similar`).then((res) => res.data),
+  });
 
-  if (!data) {
-    return <div className="text-center text-white">Loading...</div>;
+  const { data: credits } = useQuery({
+    queryKey: [`movie/${id}/credits`],
+    queryFn: () => request.get(`movie/${id}/credits`).then((res) => res.data),
+  });
+
+  if (isLoading || isImageLoading || isSimilarLoading) {
+    return (
+      <div className="text-center text-2xl min-h-10 text-red-600">
+        {" "}
+        <Loading />
+      </div>
+    );
   }
+
+  // credits?.cast.map((item) => (translate(item.character,"ru").then(res => console.log(res))));
 
   return (
     <div className="min-h-screen dark:bg-black dark:text-white text-black">
@@ -39,7 +57,7 @@ const Detail = () => {
           })`,
         }}
       >
-        <div className="absolute inset-0 bg-black bg-opacity-50 flex items-end">
+        <div className="absolute inset-0 bg-black bg-opacity-40 flex items-end">
           <div className="container mx-auto px-4 py-6">
             <h1 className="text-4xl font-bold">{data.title}</h1>
             <p className="text-gray-300 mt-2">
