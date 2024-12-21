@@ -61,7 +61,7 @@ const Header = () => {
           <div>
             <button
               onClick={handleMenu}
-              className="text-2xl text-black dark:text-white"
+              className="text-2xl text-black dark:text-white hidden max-[720px]:block"
             >
               <IoMenu />
             </button>
