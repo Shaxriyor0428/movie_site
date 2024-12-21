@@ -21,7 +21,7 @@ const Header = () => {
   const [open, setOpen] = useState(false);
 
   const [dark, setDark] = useState(
-    localStorage.getItem("dark_mode") === "true"
+    localStorage.getItem("dark_mode") === "true" || true
   );
   const { i18n, t } = useTranslation();
 
