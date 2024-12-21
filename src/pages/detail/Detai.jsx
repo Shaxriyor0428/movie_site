@@ -5,6 +5,9 @@ import { useQuery } from "@tanstack/react-query";
 import Loading from "../../components/loading/Loading";
 import translate from "translate";
 
+import imdb from "../../assets/images/image.png";
+import kinopoisk from "../../assets/images/kinopoisk.png";
+
 const Detail = () => {
   const [translatedCountries, setTranslatedCountries] = useState([]);
   const [translatedGenres, setTranslatedGenres] = useState([]);
@@ -167,6 +170,16 @@ const Detail = () => {
             </button>
           </div>
 
+          <div className="second-buttons grid grid-cols-2 gap-4 mt-12">
+            <button className="flex items-center justify-around border text-white border-[#111111] px-4  rounded-xl text-xl font-[900]">
+              {((data?.vote_average / 100) * 90).toFixed(1)}
+              <img className="w-20 h-16" src={imdb} alt="" />
+            </button>
+            <button className="flex items-center text-white justify-around border border-[#111111] px-4  rounded-xl text-xl font-[900]">
+              {data?.vote_average?.toFixed(1)}
+              <img className="w-20 h-16" src={kinopoisk} alt="" />
+            </button>
+          </div>
           <div className="Detali border-b pb-8 border-[#2D2D2D]">
             <h3 className="mt-12 text-white text-xl">Детали</h3>
             <div className="flex flex-wrap justify-between mt-6">
