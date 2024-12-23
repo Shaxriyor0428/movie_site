@@ -11,4 +11,21 @@ export const translationRu = {
   hero: {
     watch: "Смотреть",
   },
+
+  saved_messages: {
+    title: "Ваши любимые фильмы",
+    empty_title: "К сожалению, у вас нет сохраненных фильмов.",
+  },
+  toast_messages: {
+    saved: {
+      title: "Фильм сохранен.",
+    },
+    removed: {
+      title: "Фильм удален.",
+    },
+  },
+  genres: {
+    pagenation_title: "Фильмы по жанрам",
+    genre_title: "Жанры фильмов",
+  },
 };

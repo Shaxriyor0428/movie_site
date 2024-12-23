@@ -1,15 +1,17 @@
 import { createSlice } from "@reduxjs/toolkit";
+
 const savedInitialState = {
-  value: [],
+  value: JSON.parse(localStorage.getItem("saved")) || [],
 };
+
 const savedSlice = createSlice({
   name: "saved",
   initialState: savedInitialState,
 
   reducers: {
     savedMovies(state, action) {
-      state.value.push(action.payload);
-      // localStorage.setItem("saved", state.value);
+      state.value = action.payload;
+      localStorage.setItem("saved", JSON.stringify(state.value));
     },
   },
 });

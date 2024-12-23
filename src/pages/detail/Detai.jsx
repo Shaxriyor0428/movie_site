@@ -8,6 +8,7 @@ import translate from "translate";
 import imdb from "../../assets/images/image.png";
 import kinopoisk from "../../assets/images/kinopoisk.png";
 import toast, { Toaster } from "react-hot-toast";
+import Movies from "../../components/movies/Movies";
 
 const Detail = () => {
   const [translatedCountries, setTranslatedCountries] = useState([]);
@@ -124,6 +125,7 @@ const Detail = () => {
   };
 
   overviewS();
+
   return (
     <>
       <div className="min-h-screen dark:bg-black dark:text-white text-black">
@@ -257,19 +259,7 @@ const Detail = () => {
         {similar && similar.results.length > 0 && (
           <div className=" container">
             <h2 className="text-2xl font-bold mb-4">Similar Movies</h2>
-            <div className="flex flex-wrap gap-4 max-[500px]:grid grid-cols-1 max-[500px]:gap-5">
-              {similar.results.slice(0, 10).map((movie) => (
-                <div key={movie.id} className="w-56 max-[500px]:w-full ">
-                  <img
-                    onClick={() => navigate(`/product/${movie.id}`)}
-                    src={import.meta.env.VITE_IMAGE_URL + movie.poster_path}
-                    alt={movie.title}
-                    className="w-56 h-80 object-cover rounded-lg mb-2 max-[500px]:w-full max-[500px]:h-auto"
-                  />
-                  <p className="text-center">{movie.title}</p>
-                </div>
-              ))}
-            </div>
+            <Movies data={similar?.results?.slice(0, 10)} bg={"bg-black"} />
           </div>
         )}
       </div>

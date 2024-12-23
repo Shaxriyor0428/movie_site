@@ -29,7 +29,7 @@ const Home = () => {
         </div>
       )}
       <Hero movies={movie?.results} />
-      <Movies data={movie} />
+      <Movies data={movie?.results} />
     </>
   );
 };

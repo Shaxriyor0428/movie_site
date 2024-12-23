@@ -4,20 +4,28 @@ import { useQuery } from "@tanstack/react-query";
 import { request } from "../../api";
 import Movies from "../../components/movies/Movies";
 import Loading from "../../components/loading/Loading";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import toast from "react-hot-toast";
 import { useDispatch } from "react-redux";
-import { savedMovies } from "../../redux/slices/Saved";
-
+import { useTranslation } from "react-i18next";
+import translate from "translate";
 const MyMovies = () => {
   const dispatch = useDispatch();
-
+  const [searchParams, setSearchParams] = useSearchParams();
   const navigate = useNavigate();
-  const [page, setPage] = useState(1);
-  const [selectedGenre, setSelectedGenre] = useState([]);
+  const [page, setPage] = useState(+searchParams.get("page") || 1);
+  const [selectedGenre, setSelectedGenre] = useState(
+    searchParams.get("genres")?.split("-").map(Number) || []
+  );
+
+  const { t } = useTranslation();
+  translate.engine = "google";
 
   const handleChange = (event, value) => {
     setPage(value);
+    let params = new URLSearchParams(searchParams);
+    params.set("page", value.toString());
+    setSearchParams(params);
   };
 
   const { data, isLoading, error } = useQuery({
@@ -35,14 +43,13 @@ const MyMovies = () => {
   });
 
   useEffect(() => {
-    dispatch(savedMovies("HELLLO"));
     if (error) {
       toast.error("Film not found !");
       navigate("/");
     }
   }, [error, navigate]);
 
-  const { data: genres, isLoading: isGenresLoading } = useQuery({
+  const { data: genres } = useQuery({
     queryKey: ["/genre/movie/list"],
     queryFn: () =>
       request.get("/genre/movie/list").then((res) => res.data.genres),
@@ -52,11 +59,15 @@ const MyMovies = () => {
     return alert("This film not found");
   }
   const handleGenreChange = (id) => {
-    setSelectedGenre((prev) =>
-      prev.includes(id)
-        ? prev.filter((selectedId) => selectedId !== id)
-        : [...prev, id]
-    );
+    const updatedGenres = selectedGenre.includes(id)
+      ? selectedGenre.filter((selectId) => selectId !== id)
+      : [...selectedGenre, id];
+
+    const params = new URLSearchParams(searchParams);
+    params.set("page", "1");
+    params.set("genres", updatedGenres.join("-"));
+    setSearchParams(params);
+    setSelectedGenre(updatedGenres);
     setPage(1);
   };
 
@@ -69,16 +80,27 @@ const MyMovies = () => {
     );
   }
 
+  const TranslateGenre = ({ genre }) => {
+    const [translated, setTranslated] = useState(genre);
+
+    useEffect(() => {
+      const langCode = localStorage.getItem("lang_code") || "ru";
+      translate(genre, langCode).then((res) => setTranslated(res));
+    }, [genre]);
+
+    return <span>{translated}</span>;
+  };
+
   return (
     <div id="search" className="text-white min-h-screen ">
       <div className="container mx-auto px-4">
         <h2 className="text-red-500 text-3xl text-center font-bold py-4">
-          <i>Kinolarni janr bo‘yicha qidirish</i>
+          <i>{t("genres.pagenation_title")}</i>
         </h2>
 
         <div className="mb-6">
           <h3 className="dark:text-white text-lg font-medium mb-2 text-black">
-            Kino Janrlari:
+            {t("genres.genre_title")}:
           </h3>
           <div className="genre-scrollbar flex gap-4 overflow-x-auto py-2">
             {[
@@ -94,7 +116,7 @@ const MyMovies = () => {
                     : "dark:bg-slate-800 dark:text-gray-300 text-black dark:hover:bg-red-500 hover:bg-red-500 hover:text-white"
                 }`}
               >
-                {genre?.name}
+                {<TranslateGenre genre={genre?.name} />}
               </button>
             ))}
           </div>
@@ -102,7 +124,7 @@ const MyMovies = () => {
 
         <div className="mb-6">
           {data?.results?.length > 0 ? (
-            <Movies data={data} bg={"bg-gray-800"} />
+            <Movies data={data?.results} bg={"bg-gray-800"} />
           ) : (
             <div className="text-center text-lg font-semibold text-gray-300">
               Ushbu janr bo‘yicha film topilmadi.

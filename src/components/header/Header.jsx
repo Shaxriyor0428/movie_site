@@ -17,9 +17,9 @@ const LANGUAGES = [
 ];
 
 const Header = () => {
-  const [dark, setDark] = useState(
-    localStorage.getItem("dark_mode") === "true" || true
-  );
+  const [dark, setDark] = useState(() => {
+    return localStorage.getItem("dark_mode") || true;
+  });
   const { i18n, t } = useTranslation();
 
   useEffect(() => {
@@ -38,11 +38,11 @@ const Header = () => {
     });
   };
 
-  function changeLang(e) {
+  const changeLang = (e) => {
     const lang_code = e.target.value;
     i18n.changeLanguage(lang_code);
-    localStorage.setItem("lang_code", lang_code);
-  }
+    localStorage.setItem("lang_code", lang_code); // Tanlangan tilni saqlash
+  };
 
   return (
     <header
@@ -55,11 +55,11 @@ const Header = () => {
             <img
               src={logo}
               alt="logo"
-              className="w-[112px] h-9 max-[500px]:w-[100px] max-[500px]:h-7 "
+              className="w-[112px] h-9 max-[500px]:w-[100px] max-[500px]:h-7"
             />
           </Link>
         </div>
-        <ul className=" text-black flex  dark:text-white gap-10 flex-wrap max-[650px]:fixed max-[650px]:bottom-0 max-[650px]:left-0 max-[650px]:bg-[white] max-[650px]:w-full max-[650px]:justify-evenly max-[650px]:dark:bg-black max-[650px]:-z-50">
+        <ul className="text-black flex dark:text-white gap-10 flex-wrap max-[650px]:fixed max-[650px]:bottom-0 max-[650px]:left-0 max-[650px]:bg-[white] max-[650px]:w-full max-[650px]:justify-evenly max-[650px]:dark:bg-black max-[650px]:-z-50">
           {HEADER_LINKS.map((link) => (
             <li key={link.id} className="flex flex-col items-center">
               <NavLink
@@ -97,4 +97,5 @@ const Header = () => {
     </header>
   );
 };
+
 export default Header;

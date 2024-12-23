@@ -4,7 +4,7 @@ import Latest from "@/pages/latest/Latest";
 import NotFound from "../pages/not-found/NotFound";
 import Detail from "../pages/detail/Detai";
 import Layout from "../pages/layout/Layout";
-import MyMovies from "../pages/movies/Movies";
+import MyMovies from "../pages/movies/move";
 import Saved from "../pages/saved/Saved";
 
 const Router = () => {
