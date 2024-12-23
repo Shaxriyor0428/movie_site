@@ -29,6 +29,7 @@ export const translationUz = {
   genres: {
     pagenation_title: "Kinolarni janr bo‘yicha qidirish",
     genre_title: "Kino Janrlari",
+    no_genres_available: "Hozircha janrlar mavjud emas.",
   },
   not_found: {
     title: "Voy! Siz qidirayotgan sahifa mavjud emas.",

@@ -26,6 +26,7 @@ export const translationEn = {
   genres: {
     pagenation_title: "Search movies by genre",
     genre_title: "Movie Genres",
+    no_genres_available: "No genres available at the moment.",
   },
   not_found: {
     title: "Oops! The page you are looking for does not exist. ",

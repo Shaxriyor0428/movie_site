@@ -103,22 +103,28 @@ const MyMovies = () => {
             {t("genres.genre_title")}:
           </h3>
           <div className="genre-scrollbar flex gap-4 overflow-x-auto py-2">
-            {[
-              ...genres?.filter((genre) => selectedGenre.includes(genre.id)),
-              ...genres?.filter((genre) => !selectedGenre.includes(genre.id)),
-            ].map((genre) => (
-              <button
-                key={genre.id}
-                onClick={() => handleGenreChange(genre.id)}
-                className={`py-2 px-4 rounded-md border border-red-500 transition-all duration-300 whitespace-nowrap ${
-                  selectedGenre.includes(genre.id)
-                    ? "dark:bg-green-500 dark:text-white bg-blue-500 border-none"
-                    : "dark:bg-slate-800 dark:text-gray-300 text-black dark:hover:bg-red-500 hover:bg-red-500 hover:text-white"
-                }`}
-              >
-                {<TranslateGenre genre={genre?.name} />}
-              </button>
-            ))}
+            {genres?.length > 0 ? (
+              [
+                ...genres.filter((genre) => selectedGenre.includes(genre.id)),
+                ...genres.filter((genre) => !selectedGenre.includes(genre.id)),
+              ].map((genre) => (
+                <button
+                  key={genre.id}
+                  onClick={() => handleGenreChange(genre.id)}
+                  className={`py-2 px-4 rounded-md border border-red-500 transition-all duration-300 whitespace-nowrap ${
+                    selectedGenre.includes(genre.id)
+                      ? "dark:bg-green-500 dark:text-white bg-blue-500 border-none"
+                      : "dark:bg-slate-800 dark:text-gray-300 text-black dark:hover:bg-red-500 hover:bg-red-500 hover:text-white"
+                  }`}
+                >
+                  {<TranslateGenre genre={genre?.name} />}
+                </button>
+              ))
+            ) : (
+              <div className="text-gray-400 text-center">
+                {t("genres.no_genres_available")}
+              </div>
+            )}
           </div>
         </div>
 

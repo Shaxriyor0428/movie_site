@@ -27,6 +27,7 @@ export const translationRu = {
   genres: {
     pagenation_title: "Фильмы по жанрам",
     genre_title: "Жанры фильмов",
+    no_genres_available: "Жанры в данный момент недоступны.",
   },
   not_found: {
     title: "Упс! Страница, которую вы ищете, не существует.",
