@@ -84,7 +84,7 @@ const MyMovies = () => {
     const [translated, setTranslated] = useState(genre);
 
     useEffect(() => {
-      const langCode = localStorage.getItem("lang_code") || "ru";
+      const langCode = localStorage.getItem("lang_code") || "en";
       translate(genre, langCode).then((res) => setTranslated(res));
     }, [genre]);
 
