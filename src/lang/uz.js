@@ -28,6 +28,10 @@ export const translationUz = {
   },
   genres: {
     pagenation_title: "Kinolarni janr bo‘yicha qidirish",
-    genre_title:"Kino Janrlari"
+    genre_title: "Kino Janrlari",
+  },
+  not_found: {
+    title: "Voy! Siz qidirayotgan sahifa mavjud emas.",
+    button_title: "Uyga qaytish",
   },
 };

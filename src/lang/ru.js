@@ -28,4 +28,8 @@ export const translationRu = {
     pagenation_title: "Фильмы по жанрам",
     genre_title: "Жанры фильмов",
   },
+  not_found: {
+    title: "Упс! Страница, которую вы ищете, не существует.",
+    button_title: "Вернуться домой",
+  },
 };
