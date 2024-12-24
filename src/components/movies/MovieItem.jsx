@@ -32,12 +32,16 @@ const MovieItem = ({ title, poster_path, vote_average, id, bg, data }) => {
     >
       <button
         onClick={() => handleSave(data)}
-        className="absolute top-7 right-7 text-3xl font-bold"
+        className="absolute top-7 right-7 text-2xl font-bold"
       >
         {movies.some((movie) => movie.id === data.id) ? (
-          <FaBookmark className="text-red-500 " />
+          <div className="w-11 h-11 bg-slate-900 rounded-full grid place-items-center">
+            <FaBookmark className="text-red-500" />
+          </div>
         ) : (
-          <FaRegBookmark className="text-red-500 " />
+          <div className="w-11 h-11 bg-slate-900 rounded-full grid place-items-center">
+            <FaRegBookmark className="text-red-500 " />
+          </div>
         )}
       </button>
       <img

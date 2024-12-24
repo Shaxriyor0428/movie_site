@@ -6,6 +6,7 @@ import Detail from "../pages/detail/Detai";
 import Layout from "../pages/layout/Layout";
 import MyMovies from "../pages/movies-page/move";
 import Saved from "../pages/saved/Saved";
+import Search from "../pages/search/Search";
 
 const Router = () => {
   return useRoutes([
@@ -25,10 +26,10 @@ const Router = () => {
           path: "/product/:id",
           element: <Detail />,
         },
-        // {
-        //   path: "/search",
-        //   element: <Search />,
-        // },
+        {
+          path: "/search",
+          element: <Search />,
+        },
         {
           path: "/movies",
           element: <MyMovies />,
