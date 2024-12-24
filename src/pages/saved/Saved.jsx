@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import Movies from "../../components/movies/Movies";
 import { useTranslation } from "react-i18next";
-import heart from "../../assets/images/heart.jpg";
 const Saved = () => {
   const { t } = useTranslation();
   const movies = useSelector((s) => s.saved.value);
@@ -22,13 +21,6 @@ const Saved = () => {
           <>
             <div className="text-center text-4xl dark:text-red-500 font-bold py-4 max-[600px]:text-2xl">
               {t("saved_messages.empty_title")}
-            </div>
-            <div className="h-full w-full">
-              <img
-                src={heart}
-                alt=""
-                className="h-full w-full bg-cover bg-no-repeat"
-              />
             </div>
           </>
         )}
