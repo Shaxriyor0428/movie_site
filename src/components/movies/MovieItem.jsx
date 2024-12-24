@@ -5,6 +5,7 @@ import toast from "react-hot-toast";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 import { savedMovies } from "../../redux/slices/Saved";
+import { FaBookmark, FaRegBookmark } from "react-icons/fa";
 
 const MovieItem = ({ title, poster_path, vote_average, id, bg, data }) => {
   const navigate = useNavigate();
@@ -14,27 +15,12 @@ const MovieItem = ({ title, poster_path, vote_average, id, bg, data }) => {
 
   const handleSave = (product) => {
     const isSaved = movies.some((movie) => movie.id === product.id);
-    const isDark = localStorage.getItem("dark_mode") || true;
     if (isSaved) {
       const updatedMovies = movies.filter((movie) => movie.id !== product.id);
       dispatch(savedMovies(updatedMovies));
-      toast.success(t("toast_messages.removed.title"), {
-        style: {
-          borderRadius: "10px",
-          background: isDark ? "#333" : "white",
-          color: isDark ? "red" : "black",
-        },
-      });
     } else {
       const updatedMovies = [...movies, product];
       dispatch(savedMovies(updatedMovies));
-      toast.success(t("toast_messages.saved.title"), {
-        style: {
-          borderRadius: "10px",
-          background: isDark ? "#333" : "white",
-          color: isDark ? "#fff" : "black",
-        },
-      });
     }
   };
 
@@ -48,7 +34,11 @@ const MovieItem = ({ title, poster_path, vote_average, id, bg, data }) => {
         onClick={() => handleSave(data)}
         className="absolute top-7 right-7 text-3xl font-bold"
       >
-        <FaSave className="text-red-500 " />
+        {movies.some((movie) => movie.id === data.id) ? (
+          <FaBookmark className="text-red-500 " />
+        ) : (
+          <FaRegBookmark className="text-red-500 " />
+        )}
       </button>
       <img
         onClick={() => navigate(`/product/${id}`)}
